@@ -22,7 +22,7 @@ services:
   nest-postgres:
     image: nest-postgres
     container_name: nest-postgres
-    command: "npm start"
+    command: "npm run start:dev"
     depends_on:
       - nest-postgres-db
     build:
@@ -32,11 +32,14 @@ services:
       - "3000:3000"
     environment:
       LOG_LEVEL: "debug"
-      DATABASE: "nest-postgres"
-      HOST_DB: "nest-postgres-db"
-      PORT: 5432
-      USERNAME: "admin"
-      PASSWORD: "admin"
+      DB_DATABASE: "nest-postgres"
+      DB_HOST: "nest-postgres-db"
+      DB_PORT: 5432
+      DB_USERNAME: "admin"
+      DB_PASSWORD: "admin"
+      DB_SYNCRONIZE: "true"
+    tty: true
+    restart: unless-stopped
     networks:
       - nest-postgres-network
 

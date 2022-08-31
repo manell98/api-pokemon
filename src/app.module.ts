@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { environment } from './config/environment';
 
@@ -13,9 +11,11 @@ import { environment } from './config/environment';
       port: environment.db.port,
       username: environment.db.username,
       password: environment.db.password,
+      synchronize: environment.db.synchronize,
+      entities: [__dirname + '/**/*.entity{.js,.ts}'],
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
