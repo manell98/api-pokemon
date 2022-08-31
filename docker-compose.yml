@@ -1,0 +1,22 @@
+version: '3'
+services:
+  ###############################################################################
+  # PROJECT - NODE
+  ###############################################################################
+  nest-postgres:
+    image: nest-postgres
+    container_name: nest-postgres
+    command: "npm start"
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      LOG_LEVEL: "debug"
+    networks:
+      - nest-postgres-network
+
+networks:
+  nest-postgres-network:
+    driver: bridge
