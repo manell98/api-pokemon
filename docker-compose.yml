@@ -13,35 +13,35 @@ services:
       POSTGRES_DB: nest-postgres
     ports:
       - "5432:5432"
-    networks:
-      - nest-postgres-network
-
-  ###############################################################################
-  # PROJECT - NODE
-  ###############################################################################
-  nest-postgres:
-    image: nest-postgres
-    container_name: nest-postgres
-    command: "npm run start:dev"
-    depends_on:
-      - nest-postgres-db
-    build:
-      context: ./
-      dockerfile: ./Dockerfile
-    ports:
-      - "3000:3000"
-    environment:
-      LOG_LEVEL: "debug"
-      DB_DATABASE: "nest-postgres"
-      DB_HOST: "nest-postgres-db"
-      DB_PORT: 5432
-      DB_USERNAME: "admin"
-      DB_PASSWORD: "admin"
-      DB_SYNCRONIZE: "true"
-    tty: true
-    restart: unless-stopped
-    networks:
-      - nest-postgres-network
+#    networks:
+#      - nest-postgres-network
+#
+#  ###############################################################################
+#  # PROJECT - NODE
+#  ###############################################################################
+#  nest-postgres:
+#    image: nest-postgres
+#    container_name: nest-postgres
+#    command: "npm run start:dev"
+#    depends_on:
+#      - nest-postgres-db
+#    build:
+#      context: ./
+#      dockerfile: ./Dockerfile
+#    ports:
+#      - "3000:3000"
+#    environment:
+#      LOG_LEVEL: "debug"
+#      DB_DATABASE: "nest-postgres"
+#      DB_HOST: "nest-postgres-db"
+#      DB_PORT: 5432
+#      DB_USERNAME: "admin"
+#      DB_PASSWORD: "admin"
+#      DB_SYNCRONIZE: "true"
+#    tty: true
+#    restart: unless-stopped
+#    networks:
+#      - nest-postgres-network
 
 networks:
   nest-postgres-network:
