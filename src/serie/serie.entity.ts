@@ -15,6 +15,9 @@ export class SerieEntity {
   nome: string;
 
   @Column({ nullable: false })
+  avaliacao: number;
+
+  @Column({ nullable: false })
   status: string;
 
   @CreateDateColumn({ name: 'timestamp_criacao' })
