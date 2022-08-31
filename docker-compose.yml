@@ -3,7 +3,7 @@ services:
   ###############################################################################
   # POSTGRES
   ###############################################################################
-  db:
+  nest-postgres-db:
     image: postgres:14.2-alpine
     container_name: nest-postgres-db
     restart: always
@@ -13,6 +13,8 @@ services:
       POSTGRES_DB: nest-postgres
     ports:
       - "5432:5432"
+    networks:
+      - nest-postgres-network
 
   ###############################################################################
   # PROJECT - NODE
@@ -21,6 +23,8 @@ services:
     image: nest-postgres
     container_name: nest-postgres
     command: "npm start"
+    depends_on:
+      - nest-postgres-db
     build:
       context: ./
       dockerfile: ./Dockerfile
@@ -28,6 +32,11 @@ services:
       - "3000:3000"
     environment:
       LOG_LEVEL: "debug"
+      DATABASE: "nest-postgres"
+      HOST_DB: "nest-postgres-db"
+      PORT: 5432
+      USERNAME: "admin"
+      PASSWORD: "admin"
     networks:
       - nest-postgres-network
 
