@@ -14,4 +14,8 @@ export class SerieService {
   async save(serie: ISerieInterface): Promise<SerieEntity> {
     return this.serieRepository.save(this.serieRepository.create(serie));
   }
+
+  async findAll(): Promise<Array<SerieEntity>> {
+    return this.serieRepository.find();
+  }
 }

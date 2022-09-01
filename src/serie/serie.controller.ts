@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { SerieService } from './serie.service';
 import { SerieEntity } from './serie.entity';
 import { ISerieInterface } from './interfaces/serie.interface';
@@ -10,5 +10,10 @@ export class SerieController {
   @Post()
   async save(@Body() serie: ISerieInterface): Promise<SerieEntity> {
     return this.serieService.save(serie);
+  }
+
+  @Get()
+  async findAll(): Promise<Array<SerieEntity>> {
+    return this.serieService.findAll();
   }
 }
