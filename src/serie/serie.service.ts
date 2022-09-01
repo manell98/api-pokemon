@@ -18,4 +18,18 @@ export class SerieService {
   async findAll(): Promise<Array<SerieEntity>> {
     return this.serieRepository.find();
   }
+
+  async findById(id: string): Promise<SerieEntity> {
+    const serie = await this.serieRepository.findOne({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!serie) {
+      throw new Error(`Serie de id: ${id} nao encontrado!`);
+    }
+
+    return serie;
+  }
 }
