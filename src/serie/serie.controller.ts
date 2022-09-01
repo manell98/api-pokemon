@@ -18,7 +18,7 @@ export class SerieController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<SerieEntity> {
+  findById(@Param('id') id: string): Promise<SerieEntity> {
     return this.serieService.findById(id);
   }
 }

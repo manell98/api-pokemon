@@ -14,7 +14,7 @@ export class SerieEntity {
   @Column({ nullable: false })
   nome: string;
 
-  @Column({ nullable: false })
+  @Column()
   avaliacao: number;
 
   @Column({ nullable: false })
