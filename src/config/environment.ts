@@ -26,6 +26,6 @@ export const environment: IEnvironment = {
     port: Number(process.env.DB_PORT) || 5432,
     username: process.env.DB_USERNAME || 'admin',
     password: process.env.DB_PASSWORD || 'admin',
-    synchronize: Boolean(process.env.DB_SYNCRONIZE) || true, // config pra gerar as migrations no bd, só deve ser usada em desenvolvimento - EM PROD DEVE SER FALSE
+    synchronize: Boolean(process.env.DB_SYNCRONIZE) || false, // config pra gerar as migrations no bd, só deve ser usada em desenvolvimento - EM PROD DEVE SER FALSE
   },
 };
