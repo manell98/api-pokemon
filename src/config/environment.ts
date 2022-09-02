@@ -1,5 +1,6 @@
 export interface IEnvironment {
   app: {
+    name: string;
     host: string;
     logLevel: string;
     port: number;
@@ -16,6 +17,7 @@ export interface IEnvironment {
 
 export const environment: IEnvironment = {
   app: {
+    name: process.env.npm_package_name || 'nest-postgres',
     host: process.env.APP_HOST || 'localhost:3000',
     logLevel: process.env.LOG_LEVEL || 'debug',
     port: Number(process.env.API_PORT) || 3000,
