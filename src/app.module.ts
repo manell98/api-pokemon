@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { environment } from './config/environment';
 import { SerieModule } from './serie/serie.module';
+import { ChuckNorrisModule } from './chuck-norris/chuck-norris.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { SerieModule } from './serie/serie.module';
       entities: [__dirname + '/**/*.entity{.js,.ts}'],
     }),
     SerieModule,
+    ChuckNorrisModule,
   ],
   controllers: [],
   providers: [],
