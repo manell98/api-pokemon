@@ -8,6 +8,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: [environment.app.logLevel],
   });
+
+  app.setGlobalPrefix('/api/v1');
+
   await app.listen(environment.app.port);
 }
 
