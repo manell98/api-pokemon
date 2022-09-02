@@ -1,9 +1,8 @@
-import { HttpException, Injectable, Logger } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { SerieEntity } from './serie.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ISerieInterface } from './interfaces/serie.interface';
-import { ErrorEnum } from '../errors/Error.enum';
 import { environment } from '../config/environment';
 
 @Injectable()
@@ -29,13 +28,13 @@ export class SerieService {
           BODY: ${JSON.stringify(serie)}
         Resposta:
         <'ERRO SQL'>
-          CODE: ${Number(error.code) || ErrorEnum.ERRO_SQL}
+          CODE: ${Number(error.code) || HttpStatus.INTERNAL_SERVER_ERROR}
           MESSAGE: ${error.message}.
       `);
 
       throw new HttpException(
         error.message,
-        Number(error.code) || ErrorEnum.ERRO_SQL,
+        Number(error.code) || HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
   }
@@ -52,13 +51,13 @@ export class SerieService {
           MESSAGE: Erro ao retornar todas as séries...
         Resposta:
         <'ERRO SQL'>
-          CODE: ${Number(error.code) || ErrorEnum.ERRO_SQL}
+          CODE: ${Number(error.code) || HttpStatus.INTERNAL_SERVER_ERROR}
           MESSAGE: ${error.message}.
       `);
 
       throw new HttpException(
         error.message,
-        Number(error.code) || ErrorEnum.ERRO_SQL,
+        Number(error.code) || HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
   }
@@ -75,8 +74,8 @@ export class SerieService {
 
       if (!serie) {
         throw new HttpException(
-          `Serie de id: ${id} nao encontrada...`,
-          ErrorEnum.ERRO_NEGOCIAL,
+          `Série de id: ${id} nao encontrada...`,
+          HttpStatus.UNPROCESSABLE_ENTITY,
         );
       }
 
@@ -89,14 +88,16 @@ export class SerieService {
         Parâmetros da requisição:
           ID SERIE: ${id}
         Resposta:
-        <'ERRO SQL'>
-          CODE: ${Number(error.code) || ErrorEnum.ERRO_SQL}
+        <'ERRO ${
+          error.status === HttpStatus.UNPROCESSABLE_ENTITY ? 'NEGOCIAL' : 'SQL'
+        }'>
+          CODE: ${error.status || HttpStatus.INTERNAL_SERVER_ERROR}
           MESSAGE: ${error.message}.
       `);
 
       throw new HttpException(
         error.message,
-        Number(error.code) || ErrorEnum.ERRO_SQL,
+        error.status || HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
   }
