@@ -3,7 +3,7 @@ import { SerieService } from './serie.service';
 import { SerieEntity } from './serie.entity';
 import { ISerieInterface } from './interfaces/serie.interface';
 
-@Controller('api/v1/serie')
+@Controller('/serie')
 export class SerieController {
   constructor(private readonly serieService: SerieService) {}
 
