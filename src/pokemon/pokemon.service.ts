@@ -12,7 +12,7 @@ export class PokemonService {
     private readonly pokemonRepository: Repository<PokemonEntity>,
   ) {}
 
-  async findAndSavePokemon(pokemon: string): Promise<any> {
+  async findOneAndSavePokemon(pokemon: string): Promise<any> {
     const endpoint = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
 
     const result = await axios.get(endpoint);

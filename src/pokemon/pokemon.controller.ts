@@ -6,7 +6,9 @@ export class PokemonController {
   constructor(private readonly pokemonService: PokemonService) {}
 
   @Get()
-  async findAndSavePokemon(@Headers('pokemon') pokemon: string): Promise<any> {
-    return this.pokemonService.findAndSavePokemon(pokemon);
+  async findOneAndSavePokemon(
+    @Headers('pokemon') pokemon: string,
+  ): Promise<any> {
+    return this.pokemonService.findOneAndSavePokemon(pokemon);
   }
 }
