@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { environment } from '../config/environment';
 import { IApiChuckNorris } from './interfaces/ApiChuckNorris.interface';
 import { IUpdateChuckNorris } from './interfaces/UpdateChuckNorris.interface';
+import { IndexApiChuckNorrisSwagger } from './swagger/index.api-chuck-norris';
 
 @Injectable()
 export class ChuckNorrisService {
@@ -43,7 +44,9 @@ export class ChuckNorrisService {
     }
   }
 
-  formatSaveChuckNorris(dataChuckNorris: IApiChuckNorris): ChuckNorrisEntity {
+  formatSaveChuckNorris(
+    dataChuckNorris: IndexApiChuckNorrisSwagger,
+  ): ChuckNorrisEntity {
     this.logger.debug('Formatando os dados do Chuck Norris...');
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -58,7 +61,7 @@ export class ChuckNorrisService {
   }
 
   async saveDataInEntityChuckNorris(
-    inputChuckNorris: IApiChuckNorris,
+    inputChuckNorris: IndexApiChuckNorrisSwagger,
   ): Promise<ChuckNorrisEntity> {
     this.logger.debug('Salvando dados na entidade ChuckNorris');
 

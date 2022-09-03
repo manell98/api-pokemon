@@ -10,11 +10,11 @@ import {
 } from '@nestjs/common';
 import { ChuckNorrisService } from './chuck-norris.service';
 import { ChuckNorrisEntity } from './chuck-norris.entity';
-import { IApiChuckNorris } from './interfaces/ApiChuckNorris.interface';
 import { IUpdateChuckNorris } from './interfaces/UpdateChuckNorris.interface';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { IndexChuckNorrisSwagger } from './swagger/index.chuck-norris';
 import { IndexErrorSwagger } from './swagger/index.error';
+import { IndexApiChuckNorrisSwagger } from './swagger/index.api-chuck-norris';
 
 @Controller('/chuck-norris')
 @ApiTags('Chuck Norris')
@@ -50,7 +50,7 @@ export class ChuckNorrisController {
     type: IndexErrorSwagger,
   })
   async save(
-    @Body() inputChuckNorris: IApiChuckNorris,
+    @Body() inputChuckNorris: IndexApiChuckNorrisSwagger,
   ): Promise<ChuckNorrisEntity> {
     return this.chuckNorrisService.saveDataInEntityChuckNorris(
       inputChuckNorris,
