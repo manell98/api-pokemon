@@ -91,38 +91,23 @@ export class ChuckNorrisService {
   }
 
   async findAndSave(): Promise<ChuckNorrisEntity> {
-    this.logger.debug('Buscando e salvando dados da API do Chuck Norris.');
+    const chuckNorris = await this.apiChuckNorris();
 
-    try {
-      const chuckNorris = await this.apiChuckNorris();
+    this.logger.debug(
+      `Buscando e salvando dados da API do Chuck Norris de id: ${chuckNorris.idApiChuckNorris} naBase de Dados...`,
+    );
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const objChuckNorris: IApiChuckNorris = {
-        categories: chuckNorris.categorias,
-        icon_url: chuckNorris.iconeUrl,
-        id: chuckNorris.idApiChuckNorris,
-        url: chuckNorris.url,
-        value: chuckNorris.valor,
-      };
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const objChuckNorris: IApiChuckNorris = {
+      categories: chuckNorris.categorias,
+      icon_url: chuckNorris.iconeUrl,
+      id: chuckNorris.idApiChuckNorris,
+      url: chuckNorris.url,
+      value: chuckNorris.valor,
+    };
 
-      return this.saveDataInEntityChuckNorris(objChuckNorris);
-    } catch (error) {
-      this.logger.error(`
-        ERRO no MS "${environment.app.name}", método "findAndSave".
-        <'ERRO'>
-          MESSAGE: Erro ao buscar e salvar a API do chuck norris...
-        Resposta:
-        <'ERRO SQL'>
-          CODE: ${Number(error.code) || HttpStatus.INTERNAL_SERVER_ERROR}
-          MESSAGE: ${error.message}.
-      `);
-
-      throw new HttpException(
-        error.message,
-        Number(error.code) || HttpStatus.INTERNAL_SERVER_ERROR,
-      );
-    }
+    return this.saveDataInEntityChuckNorris(objChuckNorris);
   }
 
   async findAll(): Promise<Array<ChuckNorrisEntity>> {
@@ -168,11 +153,11 @@ export class ChuckNorrisService {
           MESSAGE: ${erroMenssage}
         Resposta:
         <'ERRO NEGOCIAL'>
-          CODE: ${HttpStatus.INTERNAL_SERVER_ERROR}
+          CODE: ${HttpStatus.NOT_FOUND}
           MESSAGE: ${erroMenssage}
       `);
 
-      throw new HttpException(erroMenssage, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(erroMenssage, HttpStatus.NOT_FOUND);
     } catch (error) {
       this.logger.error(`
         ERRO no MS "${environment.app.name}", método "findById".
@@ -260,11 +245,11 @@ export class ChuckNorrisService {
           MESSAGE: ${erroMenssage}
         Resposta:
         <'ERRO NEGOCIAL'>
-          CODE: ${HttpStatus.INTERNAL_SERVER_ERROR}
+          CODE: ${HttpStatus.NOT_FOUND}
           MESSAGE: ${erroMenssage}
       `);
 
-      throw new HttpException(erroMenssage, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(erroMenssage, HttpStatus.NOT_FOUND);
     } catch (error) {
       this.logger.error(`
         ERRO no MS "${environment.app.name}", método "update".
@@ -272,6 +257,57 @@ export class ChuckNorrisService {
           MESSAGE: Erro ao buscar o Chuck Norris de id: ${
             bodyChuckNorris.id
           } na base de dados...
+        Resposta:
+        <'ERRO SQL'>
+          CODE: ${Number(error.code) || HttpStatus.INTERNAL_SERVER_ERROR}
+          MESSAGE: ${error.message}.
+      `);
+
+      throw new HttpException(
+        error.message,
+        Number(error.code) || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
+  async destroy(idChuckNorris: string): Promise<string> {
+    this.logger.debug(
+      `Removendo Chuck Norris de id: ${idChuckNorris} da base de dados...`,
+    );
+
+    try {
+      const destroyedChuckNorris = await this.chuckNorrisRepository.delete(
+        idChuckNorris,
+      );
+
+      console.log('DESTROY =>', destroyedChuckNorris);
+
+      if (destroyedChuckNorris.affected >= 1) {
+        return `Chuck Norris de id: ${idChuckNorris}, removido com secesso!!`;
+      }
+
+      const erroMenssage = `Não foi encontrado nenhum Chuck Norris com id: ${idChuckNorris} para remover na base de dados...`;
+
+      this.logger.error(`
+        ERRO no MS "${environment.app.name}", método "destroy".
+        <'ERRO'>
+          MESSAGE: ${erroMenssage}
+        Parâmetros da requisição:
+          BODY: ${idChuckNorris}
+        Resposta:
+        <'ERRO NEGOCIAL'>
+          CODE: ${HttpStatus.NOT_FOUND}
+          MESSAGE: ${erroMenssage}
+      `);
+
+      throw new HttpException(erroMenssage, HttpStatus.NOT_FOUND);
+    } catch (error) {
+      this.logger.error(`
+        ERRO no MS "${environment.app.name}", método "destroy".
+        <'ERRO'>
+          MESSAGE: Erro ao remover o Chuck Norris de id: ${idChuckNorris} na base de dados...
+        Parâmetros da requisição:
+          BODY: ${idChuckNorris}
         Resposta:
         <'ERRO SQL'>
           CODE: ${Number(error.code) || HttpStatus.INTERNAL_SERVER_ERROR}

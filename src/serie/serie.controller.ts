@@ -2,8 +2,10 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { SerieService } from './serie.service';
 import { SerieEntity } from './serie.entity';
 import { ISerieInterface } from './interfaces/serie.interface';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('/serie')
+@ApiTags('Series')
 export class SerieController {
   constructor(private readonly serieService: SerieService) {}
 
