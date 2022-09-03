@@ -68,7 +68,7 @@ export class SerieService {
     try {
       const serie = await this.serieRepository.findOne({
         where: {
-          id: id,
+          id,
         },
       });
 

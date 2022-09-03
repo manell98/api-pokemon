@@ -1,4 +1,4 @@
-export interface IHabilidadesInterface {
+export interface IHabilidades {
   ability: {
     name: string;
     url: string;
