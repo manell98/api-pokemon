@@ -1,4 +1,4 @@
-export interface IOutputChuckNorris {
+export interface IApiChuckNorris {
   categories: Array<string>;
   created_at: string;
   icon_url: string;
