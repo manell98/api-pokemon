@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { environment } from './config/environment';
 import { SerieModule } from './serie/serie.module';
 import { ChuckNorrisModule } from './chuck-norris/chuck-norris.module';
+import { PokemonModule } from './pokemon/pokemon.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ChuckNorrisModule } from './chuck-norris/chuck-norris.module';
     }),
     SerieModule,
     ChuckNorrisModule,
+    PokemonModule,
   ],
   controllers: [],
   providers: [],

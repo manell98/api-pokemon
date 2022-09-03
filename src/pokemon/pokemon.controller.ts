@@ -1,0 +1,23 @@
+import { Controller, Get, Headers, Query } from '@nestjs/common';
+import { PokemonService } from './pokemon.service';
+import { PokemonEntity } from './pokemon.entity';
+
+@Controller('pokemon')
+export class PokemonController {
+  constructor(private readonly pokemonService: PokemonService) {}
+
+  @Get('/find-and-save-list')
+  async findAndSaveListPokemon(
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+  ): Promise<Array<PokemonEntity>> {
+    return this.pokemonService.findAndSaveListPokemon(page, limit);
+  }
+
+  @Get('/find-one-and-save')
+  async findOneAndSavePokemon(
+    @Headers('pokemon') pokemon: string,
+  ): Promise<PokemonEntity> {
+    return this.pokemonService.findOneAndSavePokemon(pokemon);
+  }
+}
