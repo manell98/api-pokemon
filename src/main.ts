@@ -14,12 +14,12 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle(environment.app.name)
-    .setVersion('0.0.1')
+    .setVersion(environment.app.version)
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
 
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api-docs', app, document);
 
   await app.listen(environment.app.port);
 }

@@ -1,6 +1,6 @@
 import { Controller, Get, Headers, Query } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
-import { PokemonEntity } from './pokemon.entity';
+import { PokemonEntity } from './entities/pokemon.entity';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller('pokemon')

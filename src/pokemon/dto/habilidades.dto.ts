@@ -1,4 +1,4 @@
-export interface IHabilidades {
+export class HabilidadesDTO {
   ability: {
     name: string;
     url: string;

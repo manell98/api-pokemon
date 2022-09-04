@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { IHabilidades } from './interfaces/habilidades.interface';
+import { HabilidadesDTO } from '../dto/habilidades.dto';
 
 @Entity('pokemons')
 export class PokemonEntity {
@@ -10,7 +10,7 @@ export class PokemonEntity {
   nome: string;
 
   @Column('text', { nullable: false, array: true })
-  habilidades: Array<IHabilidades>;
+  habilidades: Array<HabilidadesDTO>;
 
   @Column({ name: 'nivel_experiencia' })
   nivelExperiencia: number;
