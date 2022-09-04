@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class IndexErrorSwagger {
+export class ErrorDTO {
   @ApiProperty({
     description: 'Campo responsável por armazenar o status code do erro',
     example: 404,

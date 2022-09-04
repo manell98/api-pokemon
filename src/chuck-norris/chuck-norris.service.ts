@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import axios from 'axios';
 import { Repository } from 'typeorm';
-import { ChuckNorrisEntity } from './chuck-norris.entity';
+import { ChuckNorrisEntity } from './entities/chuck-norris.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { environment } from '../config/environment';
-import { IApiChuckNorris } from './interfaces/ApiChuckNorris.interface';
-import { IUpdateChuckNorris } from './interfaces/UpdateChuckNorris.interface';
-import { IndexApiChuckNorrisSwagger } from './swagger/index.api-chuck-norris';
+import { ChuckNorrisDTO } from './dto/chuck-norris';
+import { IUpdateChuckNorrisDTO } from './dto/update-chuck-norris.dto';
+import { ApiChuckNorrisDTO } from './dto/api-chuck-norris';
 
 @Injectable()
 export class ChuckNorrisService {
@@ -45,7 +45,7 @@ export class ChuckNorrisService {
   }
 
   formatSaveChuckNorris(
-    dataChuckNorris: IndexApiChuckNorrisSwagger,
+    dataChuckNorris: ApiChuckNorrisDTO,
   ): ChuckNorrisEntity {
     this.logger.debug('Formatando os dados do Chuck Norris...');
 
@@ -61,7 +61,7 @@ export class ChuckNorrisService {
   }
 
   async saveDataInEntityChuckNorris(
-    inputChuckNorris: IndexApiChuckNorrisSwagger,
+    inputChuckNorris: ApiChuckNorrisDTO,
   ): Promise<ChuckNorrisEntity> {
     this.logger.debug('Salvando dados na entidade ChuckNorris');
 
@@ -180,7 +180,7 @@ export class ChuckNorrisService {
   }
 
   async saveUpdatedChuckNorris(
-    inputChuckNorris: IApiChuckNorris,
+    inputChuckNorris: ChuckNorrisDTO,
   ): Promise<ChuckNorrisEntity> {
     this.logger.debug('Salvando dados na entidade ChuckNorris');
 
@@ -214,7 +214,7 @@ export class ChuckNorrisService {
   }
 
   async update(
-    bodyChuckNorris: IUpdateChuckNorris,
+    bodyChuckNorris: IUpdateChuckNorrisDTO,
   ): Promise<ChuckNorrisEntity> {
     this.logger.debug(`Atualizando Chuck Norris de ${bodyChuckNorris.id}.`);
 
