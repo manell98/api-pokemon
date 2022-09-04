@@ -4,8 +4,8 @@ import { UpdatePersonDto } from './dto/update-person.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { PersonEntity } from './entities/person.entity';
-import { AddressEntity } from './address/entities/address.entity';
-import { CreateAddressDto } from './address/dto/create-address.dto';
+import { AddressEntity } from '../address/entities/address.entity';
+import { CreateAddressDto } from '../address/dto/create-address.dto';
 
 @Injectable()
 export class PersonService {

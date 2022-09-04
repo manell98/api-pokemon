@@ -1,14 +1,16 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { HabilidadesDTO } from '../dto/habilidades.dto';
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
+import { CoachEntity } from '../../person/coach/entities/coach.entity';
 
 @Entity('pokemons')
 export class PokemonEntity {
   @ApiProperty({
-    description: 'Campo responsável por armazenar o id gerado pela Base de dados',
+    description:
+      'Campo responsável por armazenar o id gerado pela Base de dados',
     example: '03ea0ecb-0679-4fc5-b669-79df6e748e4c',
   })
-  @PrimaryGeneratedColumn( 'uuid')
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @ApiProperty({
@@ -19,17 +21,25 @@ export class PokemonEntity {
   nome: string;
 
   @ApiProperty({
-    description: 'Campo responsável por armazenar o nível de experiência do pokemon',
+    description:
+      'Campo responsável por armazenar o nível de experiência do pokemon',
     type: HabilidadesDTO,
-    isArray: true
+    isArray: true,
   })
   @Column('text', { nullable: false, array: true })
   habilidades: Array<HabilidadesDTO>;
 
   @ApiProperty({
-    description: 'Campo responsável por armazenar o nível de experiência do pokemon',
+    description:
+      'Campo responsável por armazenar o nível de experiência do pokemon',
     example: '123',
   })
   @Column({ name: 'nivel_experiencia' })
   nivelExperiencia: number;
+
+  @ManyToOne(
+    () => CoachEntity,
+    (coachEntity: CoachEntity) => coachEntity.pokemons,
+  )
+  coach: CoachEntity;
 }
