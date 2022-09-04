@@ -9,12 +9,12 @@ import {
   Query,
 } from '@nestjs/common';
 import { ChuckNorrisService } from './chuck-norris.service';
-import { ChuckNorrisEntity } from './chuck-norris.entity';
-import { IUpdateChuckNorris } from './interfaces/UpdateChuckNorris.interface';
+import { ChuckNorrisEntity } from './entities/chuck-norris.entity';
+import { IUpdateChuckNorrisDTO } from './dto/update-chuck-norris.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { IndexChuckNorrisSwagger } from './swagger/index.chuck-norris';
-import { IndexErrorSwagger } from './swagger/index.error';
-import { IndexApiChuckNorrisSwagger } from './swagger/index.api-chuck-norris';
+import { ChuckNorrisDTO } from './dto/chuck-norris';
+import { ErrorDTO } from './dto/error.dto';
+import { ApiChuckNorrisDTO } from './dto/api-chuck-norris';
 
 @Controller('/chuck-norris')
 @ApiTags('Chuck Norris')
@@ -26,12 +26,12 @@ export class ChuckNorrisController {
   @ApiResponse({
     status: 200,
     description: 'Retorna os dados do Chuck Norris',
-    type: IndexChuckNorrisSwagger,
+    type: ChuckNorrisDTO,
   })
   @ApiResponse({
     status: 500,
     description: 'Erro ao conectar na API do Chuck Norris',
-    type: IndexErrorSwagger,
+    type: ErrorDTO,
   })
   async apiChuckNorris(): Promise<ChuckNorrisEntity> {
     return this.chuckNorrisService.apiChuckNorris();
@@ -42,15 +42,15 @@ export class ChuckNorrisController {
   @ApiResponse({
     status: 201,
     description: 'Chuck Norris salvo com sucesso!!',
-    type: IndexChuckNorrisSwagger,
+    type: ChuckNorrisDTO,
   })
   @ApiResponse({
     status: 500,
     description: 'Erro ao salvar o Chuck Norris na Base de Dados',
-    type: IndexErrorSwagger,
+    type: ErrorDTO,
   })
   async save(
-    @Body() inputChuckNorris: IndexApiChuckNorrisSwagger,
+    @Body() inputChuckNorris: ApiChuckNorrisDTO,
   ): Promise<ChuckNorrisEntity> {
     return this.chuckNorrisService.saveDataInEntityChuckNorris(
       inputChuckNorris,
@@ -64,12 +64,12 @@ export class ChuckNorrisController {
   @ApiResponse({
     status: 201,
     description: 'Chuck Norris encontrado e salvo com sucesso!!',
-    type: IndexChuckNorrisSwagger,
+    type: ChuckNorrisDTO,
   })
   @ApiResponse({
     status: 500,
     description: 'Erro ao buscar e salvar o Chuck Norris na Base de Dados',
-    type: IndexErrorSwagger,
+    type: ErrorDTO,
   })
   async findAndSave(): Promise<ChuckNorrisEntity> {
     return this.chuckNorrisService.findAndSave();
@@ -82,13 +82,13 @@ export class ChuckNorrisController {
   @ApiResponse({
     status: 200,
     description: 'Todos Chuck Norris retornados com sucesso!!',
-    type: IndexChuckNorrisSwagger,
+    type: ChuckNorrisDTO,
     isArray: true,
   })
   @ApiResponse({
     status: 500,
     description: 'Erro ao retornar todos os Chuck Norris da Base de Dados',
-    type: IndexErrorSwagger,
+    type: ErrorDTO,
   })
   async findAll(): Promise<Array<ChuckNorrisEntity>> {
     return this.chuckNorrisService.findAll();
@@ -101,17 +101,17 @@ export class ChuckNorrisController {
   @ApiResponse({
     status: 200,
     description: 'Chuck Norris retornado com sucesso!!',
-    type: IndexChuckNorrisSwagger,
+    type: ChuckNorrisDTO,
   })
   @ApiResponse({
     status: 402,
     description: 'Erro, nenhum Chuck Norris encontrado da Base de Dados',
-    type: IndexErrorSwagger,
+    type: ErrorDTO,
   })
   @ApiResponse({
     status: 500,
     description: 'Erro ao retornar o Chuck Norris da Base de Dados',
-    type: IndexErrorSwagger,
+    type: ErrorDTO,
   })
   async findById(
     @Headers('id-chuck-norris') idChuckNorris: string,
@@ -126,21 +126,21 @@ export class ChuckNorrisController {
   @ApiResponse({
     status: 200,
     description: 'Chuck Norris retornado com sucesso!!',
-    type: IndexChuckNorrisSwagger,
+    type: ChuckNorrisDTO,
   })
   @ApiResponse({
     status: 402,
     description:
       'Erro, nenhum Chuck Norris encontrado para atualizar na Base de Dados',
-    type: IndexErrorSwagger,
+    type: ErrorDTO,
   })
   @ApiResponse({
     status: 500,
     description: 'Erro ao tentar atualizar o Chuck Norris na Base de Dados',
-    type: IndexErrorSwagger,
+    type: ErrorDTO,
   })
   async update(
-    @Body() bodyChuckNorris: IUpdateChuckNorris,
+    @Body() bodyChuckNorris: IUpdateChuckNorrisDTO,
   ): Promise<ChuckNorrisEntity> {
     return this.chuckNorrisService.update(bodyChuckNorris);
   }
@@ -156,12 +156,12 @@ export class ChuckNorrisController {
     status: 402,
     description:
       'Erro, nenhum Chuck Norris encontrado para remover na Base de Dados',
-    type: IndexErrorSwagger,
+    type: ErrorDTO,
   })
   @ApiResponse({
     status: 500,
     description: 'Erro ao tentar remover o Chuck Norris na Base de Dados',
-    type: IndexErrorSwagger,
+    type: ErrorDTO,
   })
   async destroy(
     @Query('id-chuck-norris') idChuckNorris: string,
