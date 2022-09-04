@@ -1,4 +1,11 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { HabilidadesDTO } from '../dto/habilidades.dto';
 import { ApiProperty } from '@nestjs/swagger';
 import { CoachEntity } from '../../person/coach/entities/coach.entity';
@@ -42,4 +49,10 @@ export class PokemonEntity {
     (coachEntity: CoachEntity) => coachEntity.pokemons,
   )
   coach: CoachEntity;
+
+  @CreateDateColumn({ name: 'timestamp_criacao' })
+  tsCriacao: Date;
+
+  @UpdateDateColumn({ name: 'timestamp_edicao' })
+  tsEdicao: Date;
 }

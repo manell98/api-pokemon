@@ -1,11 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { environment } from './config/environment';
-import { SerieModule } from './serie/serie.module';
-import { ChuckNorrisModule } from './chuck-norris/chuck-norris.module';
 import { PokemonModule } from './pokemon/pokemon.module';
-import { PersonModule } from './person/person.module';
-import { CompanyModule } from './company/company.module';
+import { CoachModule } from './person/coach/coach.module';
 
 @Module({
   imports: [
@@ -19,11 +16,8 @@ import { CompanyModule } from './company/company.module';
       synchronize: environment.db.synchronize,
       entities: [__dirname + '/**/*.entity{.js,.ts}'],
     }),
-    SerieModule,
-    ChuckNorrisModule,
+    CoachModule,
     PokemonModule,
-    PersonModule,
-    CompanyModule,
   ],
   controllers: [],
   providers: [],

@@ -1,6 +1,12 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { PersonEntity } from '../../person/entities/person.entity';
-import { CompanyEntity } from '../../company/entities/company.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { CoachEntity } from '../../person/coach/entities/coach.entity';
 
 @Entity('address')
 export class AddressEntity {
@@ -25,9 +31,15 @@ export class AddressEntity {
   @Column({ nullable: false })
   uf: string;
 
-  @ManyToOne(() => PersonEntity, (person: PersonEntity) => person.endereco)
-  person: PersonEntity;
+  @ManyToOne(
+    () => CoachEntity,
+    (coachEntity: CoachEntity) => coachEntity.endereco,
+  )
+  coach: CoachEntity;
 
-  @ManyToOne(() => CompanyEntity, (company: CompanyEntity) => company.adress)
-  company: CompanyEntity;
+  @CreateDateColumn({ name: 'timestamp_criacao' })
+  tsCriacao: Date;
+
+  @UpdateDateColumn({ name: 'timestamp_edicao' })
+  tsEdicao: Date;
 }

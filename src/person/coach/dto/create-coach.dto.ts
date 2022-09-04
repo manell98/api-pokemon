@@ -1,7 +1,7 @@
-import { CreatePersonDto } from '../../dto/create-person.dto';
-import { CreatePokemonDto } from '../../../pokemon/dto/create-pokemon.dto';
+import { Person } from '../../person';
+import { CreateAddressDto } from '../../../address/dto/create-address.dto';
 
-export class CreateCoachDto extends CreatePersonDto {
-  nivelExperiencia: string;
-  pokemons: Array<CreatePokemonDto>;
+export class CreateCoachDto extends Person {
+  endereco: Array<CreateAddressDto>;
+  nivelExperiencia: number;
 }
