@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class IndexApiChuckNorrisSwagger {
+export class ApiChuckNorrisDTO {
   @ApiProperty({
     description: 'Campo responsável por armazenar o status code do erro',
     example: ['Poder do Chuck Norris'],
