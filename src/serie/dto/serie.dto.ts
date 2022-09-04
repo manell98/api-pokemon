@@ -1,4 +1,4 @@
-export interface ISerieInterface {
+export class SerieDTO {
   nome: string;
   avaliacao: number;
   status: string;

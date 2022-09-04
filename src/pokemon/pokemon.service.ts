@@ -2,12 +2,12 @@ import { Injectable, Logger } from '@nestjs/common';
 import axios from 'axios';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { PokemonEntity } from './pokemon.entity';
-import { IOutputPokemonAPI } from './interfaces/outputPokemonAPI.interface';
+import { PokemonEntity } from './entities/pokemon.entity';
+import { OutputPokemonAPIDTO } from './dto/outputPokemonAPI.dto';
 import {
-  IPaginacaoObjetoPokemonAPI,
+  PaginacaoObjetoPokemonAPIDTO,
   IPaginacaoPokemonAPI,
-} from './interfaces/paginacaoPokemonAPI.interface';
+} from './dto/paginacaoPokemonAPI.dto';
 
 @Injectable()
 export class PokemonService {
@@ -38,7 +38,7 @@ export class PokemonService {
     const outputPaginacaoPokemonAPI: IPaginacaoPokemonAPI = result.data;
 
     outputPaginacaoPokemonAPI.results.forEach(
-      (objetoPokemonAPI: IPaginacaoObjetoPokemonAPI) => {
+      (objetoPokemonAPI: PaginacaoObjetoPokemonAPIDTO) => {
         listaPokemons.push(objetoPokemonAPI.name);
       },
     );
@@ -59,7 +59,7 @@ export class PokemonService {
 
     const result = await axios.get(endpoint);
 
-    const outputPokemon: IOutputPokemonAPI = result.data;
+    const outputPokemon: OutputPokemonAPIDTO = result.data;
 
     return this.pokemonRepository.save(
       this.pokemonRepository.create({

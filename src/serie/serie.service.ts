@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { SerieEntity } from './serie.entity';
+import { SerieEntity } from './entities/serie.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ISerieInterface } from './interfaces/serie.interface';
+import { SerieDTO } from './dto/serie.dto';
 import { environment } from '../config/environment';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class SerieService {
     private readonly serieRepository: Repository<SerieEntity>,
   ) {}
 
-  async save(serie: ISerieInterface): Promise<SerieEntity> {
+  async save(serie: SerieDTO): Promise<SerieEntity> {
     this.logger.debug(`Cadastrando nova série...`);
 
     try {
