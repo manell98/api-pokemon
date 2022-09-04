@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { PersonEntity } from '../../person/entities/person.entity';
+import { CompanyEntity } from "../../company/entities/company.entity";
 
 @Entity('address')
 export class AddressEntity {
@@ -26,4 +27,7 @@ export class AddressEntity {
 
   @ManyToOne(() => PersonEntity, (person: PersonEntity) => person.endereco)
   person: PersonEntity;
+
+  @ManyToOne(() => CompanyEntity, (company: CompanyEntity) => company.adress)
+  company: CompanyEntity;
 }

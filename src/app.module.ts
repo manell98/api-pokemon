@@ -5,6 +5,7 @@ import { SerieModule } from './serie/serie.module';
 import { ChuckNorrisModule } from './chuck-norris/chuck-norris.module';
 import { PokemonModule } from './pokemon/pokemon.module';
 import { PersonModule } from './person/person.module';
+import { CompanyModule } from './company/company.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { PersonModule } from './person/person.module';
     ChuckNorrisModule,
     PokemonModule,
     PersonModule,
+    CompanyModule,
   ],
   controllers: [],
   providers: [],
