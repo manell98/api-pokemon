@@ -4,6 +4,7 @@ import { environment } from './config/environment';
 import { SerieModule } from './serie/serie.module';
 import { ChuckNorrisModule } from './chuck-norris/chuck-norris.module';
 import { PokemonModule } from './pokemon/pokemon.module';
+import { PeopleModule } from './people/people.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { PokemonModule } from './pokemon/pokemon.module';
     SerieModule,
     ChuckNorrisModule,
     PokemonModule,
+    PeopleModule,
   ],
   controllers: [],
   providers: [],
