@@ -8,7 +8,7 @@ import { AddressEntity } from '../address/entities/address.entity';
 import { CreateAddressDto } from '../address/dto/create-address.dto';
 
 @Injectable()
-export class PeopleService {
+export class PersonService {
   constructor(
     @InjectRepository(PersonEntity)
     private readonly personEntityRepository: Repository<PersonEntity>,
@@ -18,7 +18,7 @@ export class PeopleService {
   ) {}
 
   async create(createPersonDto: CreatePersonDto) {
-    const people = await this.personEntityRepository.save(
+    const person = await this.personEntityRepository.save(
       this.personEntityRepository.create(createPersonDto),
     );
 
@@ -33,7 +33,7 @@ export class PeopleService {
           address.bairro = createAddressDto.bairro;
           address.cidade = createAddressDto.cidade;
           address.uf = createAddressDto.uf;
-          address.person = people;
+          address.person = person;
 
           await this.addressEntityRepository.save(
             this.addressEntityRepository.create(address),
@@ -42,7 +42,7 @@ export class PeopleService {
       ),
     );
 
-    return people;
+    return person;
   }
 
   findAll() {

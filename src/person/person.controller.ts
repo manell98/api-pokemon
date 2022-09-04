@@ -7,13 +7,13 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { PeopleService } from './people.service';
+import { PersonService } from './person.service';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
 
 @Controller('people')
-export class PeopleController {
-  constructor(private readonly peopleService: PeopleService) {}
+export class PersonController {
+  constructor(private readonly peopleService: PersonService) {}
 
   @Post()
   async create(@Body() createPersonDto: CreatePersonDto) {
