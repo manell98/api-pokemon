@@ -1,4 +1,4 @@
-import {ApiProperty} from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class IUpdateChuckNorrisDTO {
   @ApiProperty({
@@ -9,7 +9,8 @@ export class IUpdateChuckNorrisDTO {
   categories: Array<string>;
 
   @ApiProperty({
-    description: 'Campo responsável por armazenar a url do icone do chuck norris',
+    description:
+      'Campo responsável por armazenar a url do icone do chuck norris',
     example: 'https://assets.chucknorris.host/img/avatar/chuck-norris.png',
   })
   icon_url: string;

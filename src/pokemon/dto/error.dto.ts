@@ -9,8 +9,7 @@ export class ErrorDTO {
 
   @ApiProperty({
     description: 'Campo responsável por armazenar a mensagem do erro',
-    example:
-      'Iternal server error',
+    example: 'Iternal server error',
   })
   message: string;
 }

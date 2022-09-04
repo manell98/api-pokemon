@@ -2,7 +2,7 @@ import { Controller, Get, Headers, Query } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
 import { PokemonEntity } from './entities/pokemon.entity';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { ErrorDTO } from "./dto/error.dto";
+import { ErrorDTO } from './dto/error.dto';
 
 @Controller('pokemon')
 @ApiTags('Pokemon')
@@ -10,13 +10,14 @@ export class PokemonController {
   constructor(private readonly pokemonService: PokemonService) {}
 
   @ApiOperation({
-    summary: 'Busca, lista e salva os pokemons na base de dados, deacordo com o número da página e limite de dados',
+    summary:
+      'Busca, lista e salva os pokemons na base de dados, deacordo com o número da página e limite de dados',
   })
   @ApiResponse({
     status: 201,
     description: 'pokemons listados e salvados com sucesso!!',
     type: PokemonEntity,
-    isArray: true
+    isArray: true,
   })
   @ApiResponse({
     status: 500,

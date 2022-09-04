@@ -44,9 +44,7 @@ export class ChuckNorrisService {
     }
   }
 
-  formatSaveChuckNorris(
-    dataChuckNorris: ApiChuckNorrisDTO,
-  ): ChuckNorrisEntity {
+  formatSaveChuckNorris(dataChuckNorris: ApiChuckNorrisDTO): ChuckNorrisEntity {
     this.logger.debug('Formatando os dados do Chuck Norris...');
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
