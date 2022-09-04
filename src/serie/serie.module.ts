@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SerieService } from './serie.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SerieEntity } from './serie.entity';
+import { SerieEntity } from './entities/serie.entity';
 import { SerieController } from './serie.controller';
 
 @Module({
