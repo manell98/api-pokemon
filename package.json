@@ -73,7 +73,12 @@
       "**/*.(t|j)s"
     ],
     "collectCoverage": true,
-    "coverageDirectory": "coverage/typescript/",
+    "coverageDirectory": "../coverage/typescript/",
+    "coverageReporters": [
+      "json",
+      "html",
+      "lcov"
+    ],
     "testEnvironment": "node"
   }
 }
