@@ -21,7 +21,7 @@ export class CoachService {
     private readonly pokemonEntityRepository: Repository<PokemonEntity>,
   ) {}
 
-  async create(createCoachDto: CreateCoachDto) {
+  async create(createCoachDto: CreateCoachDto): Promise<CoachEntity> {
     const coach = await this.coachEntityRepository.save(
       this.coachEntityRepository.create(createCoachDto),
     );
