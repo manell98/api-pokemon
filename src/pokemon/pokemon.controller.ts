@@ -8,7 +8,7 @@ import { ApiTags } from '@nestjs/swagger';
 export class PokemonController {
   constructor(private readonly pokemonService: PokemonService) {}
 
-  @Get('/find-and-save-list')
+  @Get('/find-list-and-save')
   async findAndSaveListPokemon(
     @Query('page') page: number,
     @Query('limit') limit: number,
