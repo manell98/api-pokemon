@@ -1,4 +1,9 @@
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 export class Person {
   @PrimaryGeneratedColumn('uuid')
@@ -15,4 +20,10 @@ export class Person {
 
   @Column({ nullable: false })
   idade: number;
+
+  @CreateDateColumn({ name: 'timestamp_criacao' })
+  tsCriacao: Date;
+
+  @UpdateDateColumn({ name: 'timestamp_edicao' })
+  tsEdicao: Date;
 }

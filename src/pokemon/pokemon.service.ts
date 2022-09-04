@@ -18,7 +18,7 @@ export class PokemonService {
     private readonly pokemonRepository: Repository<PokemonEntity>,
   ) {}
 
-  async findAndSaveListPokemon(
+  async findListAndSavePokemon(
     page: number,
     limit: number,
   ): Promise<Array<PokemonEntity>> {

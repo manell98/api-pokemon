@@ -25,11 +25,11 @@ export class PokemonController {
     type: ErrorDTO,
   })
   @Get('/find-list-and-save')
-  async findAndSaveListPokemon(
+  async findListAndSavePokemon(
     @Query('page') page: number,
     @Query('limit') limit: number,
   ): Promise<Array<PokemonEntity>> {
-    return this.pokemonService.findAndSaveListPokemon(page, limit);
+    return this.pokemonService.findListAndSavePokemon(page, limit);
   }
 
   @ApiOperation({
